@@ -1,24 +1,7 @@
-# README
+A day at a coffee shop!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A customer visits a coffee shop that sells a bunch of items (e.g. beverages, sandwiches, etc.).
 
-Things you may want to cover:
+Items have varying tax rates and some are free or offered at a discount when ordered with another item.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The customer is made aware of the order total and once he pays for it, he can wait until notified of the order completion
