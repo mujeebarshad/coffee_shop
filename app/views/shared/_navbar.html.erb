@@ -1,0 +1,47 @@
+<% name = current_user.present? ? current_user.name : 'Stranger' %>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Coffee Shop</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <% if user_signed_in? && current_user.role == User::ROLES[:admin] %>
+      <li class="nav-item">
+          <%= link_to 'Add Customer', users_new_customer_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item mr-2">
+        <%= link_to 'Customers', users_list_customers_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item mr-2">
+          <%= link_to 'Add Item', new_item_path, class: 'nav-link' %>
+      </li>
+      <% end %>
+      <% if user_signed_in? %>
+        <li class="nav-item mr-2">
+          <%= link_to 'Items', items_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item mr-2">
+          <%= link_to 'Orders', orders_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item mt-2 mr-2">
+              <%= name %>
+          </li>
+          <li class="nav-item">
+              <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+              <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+              <%= link_to 'Register', new_user_registration_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+    </ul>
+  </div>
+</nav>

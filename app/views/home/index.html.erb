@@ -1,0 +1,7 @@
+<div class="jumbotron">
+	<% if current_user.role == User::ROLES[:admin] %>
+  	<h1 class="display-4 text-center">Admin Panel</h1>
+  <% else %>
+  	<h1 class="display-4 text-center">Welcome to Coffee Shop!</h1>
+  <% end %>
+</div>

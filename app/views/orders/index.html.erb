@@ -1,0 +1,36 @@
+<div class='container'>
+	<% if @orders.present? %>
+		<h2>List of Orders</h2>
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Status</th>
+		      <th scope="col">No of Items</th>
+		      <th scope="col">Total Amount</th>
+		      <th scope="col">Discounted Amount</th>
+		      <th></th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<% @orders.each do |order| %>
+			    <tr>
+			      <td><%= order.id %></td>
+			      <td><%= order.state.capitalize %></td>
+			      <td><%= order.items.count %></td>
+			      <% discounted_sum, total_sum = calculate_amount(order.items) %>
+			      <td><%= total_sum %></td>
+			      <td><%= discounted_sum %></td>
+			      <td><%= link_to 'Process Order', "/orders/process_order/#{order.id}" %></td>
+			      <% if order.state == Order::STATE[:completed] && current_user.is_customer? %>
+			      	<td><%= link_to 'Remove Order', "/orders/remove_order/#{order.id}", method: :post %></td>
+			      <% end %>
+		    </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	<% else %>
+		<h2>No orders Available</h2>
+	<% end %>
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+	<% if @items.present? %>
+		<h2>List of Items</h2>
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">Name</th>
+		      <th scope="col">Type</th>
+		      <th scope="col">Price</th>
+		      <th scope="col">Discount(%)</th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<% @items.each do |item| %>
+			    <tr>
+			      <td><%= item.name %></td>
+			      <td><%= Item::ITEM_TYPES[item.item_type.to_sym] %></td>
+			      <td><%= item.price %></td>
+			      <td><%= item.discount %></td>
+			      <% if current_user.role == User::ROLES[:customer] %>
+					  	<td><%= link_to 'Add To Order', orders_path(item_id: item), method: :post, class: 'float-right' %></td>
+				  	<% end %>
+		    </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	<% else %>
+		<h2>No Items Available</h2>
+	<% end %>
+</div
